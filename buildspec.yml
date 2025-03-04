@@ -1,0 +1,33 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - echo Installing pnpm...
+      - npm install -g pnpm
+  pre_build:
+    commands:
+      - echo Installing source NPM dependencies using pnpm...
+      - pnpm install
+  build:
+    commands:
+      - echo Build started on date
+      - echo Compiling the NestJS application
+      - pnpm run build
+  post_build:
+    commands:
+      - echo Build completed on date
+artifacts:
+  files:
+    - dist//*
+    - package.json
+    - pnpm-lock.yaml
+    - node_modules/@nestjs//*
+    - node_modules/@types//*
+    - node_modules/rxjs//*
+    - node_modules/typescript//*
+    - node_modules/reflect-metadata//*
+    - node_modules/class-transformer//*
+    - node_modules/class-validator//*
